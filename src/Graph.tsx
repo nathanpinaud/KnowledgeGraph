@@ -16,10 +16,84 @@ export const GraphPage = () => {
     const [path, setPath] = useState([] as string[]);
 
     const [data, setData] = useState({
-        nodes: [{ id: "Eric" }, { id: "Nathan" }, { id: "Elyne" }],
+        nodes: [
+            { id: "Counter-Strike" },
+            { id: "Weapon", symbolType: "square" },
+            { id: "Riffle", symbolType: "square" },
+            { id: "Pistol", symbolType: "square" },
+            { id: "Sniper", symbolType: "square" },
+            { id: "Shotgun", symbolType: "square" },
+            { id: "SMG", symbolType: "square" },
+            { id: "Famas" },
+            { id: "Glock-18" },
+            { id: "AK-47" },
+            { id: "M4A1" },
+            { id: "M4A4" },
+            { id: "USP-S" },
+            { id: "Desert Eagle" },
+            { id: "P250" },
+            { id: "Tec-9" },
+            { id: "Five-Seven" },
+            { id: "AWP" },
+            { id: "SSG 08" },
+            { id: "G3SG1" },
+            { id: "SCAR-20" },
+            { id: "MAG-7" },
+            { id: "Nova" },
+            { id: "XM1014" },
+            { id: "Sawed-Off" },
+            { id: "MP9" },
+            { id: "MAC-10" },
+            { id: "MP7" },
+            { id: "UMP-45" },
+            { id: "P90" },
+            { id: "PP-Bizon" },
+            { id: "MP5-SD" },
+            { id: "Galil AR" },
+            { id: "SG 553" },
+            { id: "AUG" },
+            { id: "M249" },
+            { id: "Negev" },
+            { id: "30", color: "red" }
+        ],
         links: [
-            { source: "Eric", target: "Nathan", label: "ami" },
-            { source: "Eric", target: "Elyne", label: "ami" },
+            { source: "Counter-Strike", target: "Weapon", label: "contains" },
+            { source: "Riffle", target: "Weapon", label: "ako", color: "#000000" },
+            { source: "Sniper", target: "Weapon", label: "ako", color: "#000000" },
+            { source: "Shotgun", target: "Weapon", label: "ako", color: "#000000" },
+            { source: "SMG", target: "Weapon", label: "ako", color: "#000000" },
+            { source: "Pistol", target: "Weapon", label: "ako", color: "#000000" },
+            { source: "Famas", target: "Riffle", label: "instance", strokeDasharray: "5" },
+            { source: "Glock-18", target: "Pistol", label: "instance", strokeDasharray: "5" },
+            { source: "AK-47", target: "Riffle", label: "instance", strokeDasharray: "5" },
+            { source: "M4A1", target: "Riffle", label: "instance", strokeDasharray: "5" },
+            { source: "M4A4", target: "Riffle", label: "instance", strokeDasharray: "5" },
+            { source: "USP-S", target: "Pistol", label: "instance", strokeDasharray: "5" },
+            { source: "Desert Eagle", target: "Pistol", label: "instance", strokeDasharray: "5" },
+            { source: "P250", target: "Pistol", label: "instance", strokeDasharray: "5" },
+            { source: "Tec-9", target: "Pistol", label: "instance", strokeDasharray: "5" },
+            { source: "Five-Seven", target: "Pistol", label: "instance", strokeDasharray: "5" },
+            { source: "AWP", target: "Sniper", label: "instance", strokeDasharray: "5" },
+            { source: "SSG 08", target: "Sniper", label: "instance", strokeDasharray: "5" },
+            { source: "G3SG1", target: "Sniper", label: "instance", strokeDasharray: "5" },
+            { source: "SCAR-20", target: "Sniper", label: "instance", strokeDasharray: "5" },
+            { source: "MAG-7", target: "Shotgun", label: "instance", strokeDasharray: "5" },
+            { source: "Nova", target: "Shotgun", label: "instance", strokeDasharray: "5" },
+            { source: "XM1014", target: "Shotgun", label: "instance", strokeDasharray: "5" },
+            { source: "Sawed-Off", target: "Shotgun", label: "instance", strokeDasharray: "5" },
+            { source: "MP9", target: "SMG", label: "instance", strokeDasharray: "5" },
+            { source: "MAC-10", target: "SMG", label: "instance", strokeDasharray: "5" },
+            { source: "MP7", target: "SMG", label: "instance", strokeDasharray: "5" },
+            { source: "UMP-45", target: "SMG", label: "instance", strokeDasharray: "5" },
+            { source: "P90", target: "SMG", label: "instance", strokeDasharray: "5" },
+            { source: "PP-Bizon", target: "SMG", label: "instance", strokeDasharray: "5" },
+            { source: "MP5-SD", target: "SMG", label: "instance", strokeDasharray: "5" },
+            { source: "Galil AR", target: "Riffle", label: "instance", strokeDasharray: "5" },
+            { source: "SG 553", target: "Riffle", label: "instance", strokeDasharray: "5" },
+            { source: "AUG", target: "Riffle", label: "instance", strokeDasharray: "5" },
+            { source: "M249", target: "Riffle", label: "instance", strokeDasharray: "5" },
+            { source: "Negev", target: "Riffle", label: "instance", strokeDasharray: "5" },
+            { source: "AK-47", target: "30", label: "ammo", color: "red" },
         ],
     });
 
@@ -46,6 +120,9 @@ export const GraphPage = () => {
             renderLabel: true
         },
         directed: true,
+        d3: {
+            gravity: -150,
+        },
     };
 
     const onClickNode = function (nodeId: string) {
@@ -401,6 +478,14 @@ export const GraphPage = () => {
 
             </Box>
             <Box className="flex justify-center">
+                <Box>
+                    <Typography variant="h5">Légende</Typography>
+                    <Typography variant="h6">Noeud carré = Concept</Typography>
+                    <Typography variant="h6">Noeud rond = Instance</Typography>
+                    <Typography variant="h6">Noeud et relation rouge = Attribut</Typography>
+                    <Typography variant="h6">AKO - A kind of = relation extand</Typography>
+                    <Typography variant="h6">instance = relation d'héritage</Typography>
+                </Box>
                 <Box className="flex flex-col p-2">
                     <Typography variant="h6">Recherche</Typography>
 
