@@ -3,6 +3,28 @@ import { Button, Box, TextField, FormControl, InputLabel, Select, MenuItem, Chec
 import { useEffect, useState } from "react";
 
 
+interface Node {
+    id: string;
+
+    symbolType?: string;
+    color?: string;
+
+    attr: Node[];
+}
+
+interface Link {
+    source: string;
+    target: string;
+    label: string;
+    color?: string;
+    strokeDasharray?: string;
+}
+
+interface Attribute {
+    node: Node;
+    link: Link;
+}
+
 export const GraphPage = () => {
     const [title, setTitle] = useState('');
 
@@ -18,13 +40,13 @@ export const GraphPage = () => {
     const [data, setData] = useState({
         nodes: [
             { id: "Counter-Strike" },
-            { id: "Weapon", symbolType: "square" },
+            { id: "Weapon", symbolType: "square" }, //carré = concept
             { id: "Riffle", symbolType: "square" },
             { id: "Pistol", symbolType: "square" },
             { id: "Sniper", symbolType: "square" },
             { id: "Shotgun", symbolType: "square" },
             { id: "SMG", symbolType: "square" },
-            { id: "Famas" },
+            { id: "Famas" },    //rond par défault = instance
             { id: "Glock-18" },
             { id: "AK-47" },
             { id: "M4A1" },
@@ -54,16 +76,16 @@ export const GraphPage = () => {
             { id: "AUG" },
             { id: "M249" },
             { id: "Negev" },
-            { id: "30", color: "red" }
+            { id: "30", color: "red" } //rouge = attribut
         ],
         links: [
-            { source: "Counter-Strike", target: "Weapon", label: "contains" },
-            { source: "Riffle", target: "Weapon", label: "ako", color: "#000000" },
+            { source: "Counter-Strike", target: "Weapon", label: "contains" }, //relation simple
+            { source: "Riffle", target: "Weapon", label: "ako", color: "#000000" }, //a kind of = relation heritage
             { source: "Sniper", target: "Weapon", label: "ako", color: "#000000" },
             { source: "Shotgun", target: "Weapon", label: "ako", color: "#000000" },
             { source: "SMG", target: "Weapon", label: "ako", color: "#000000" },
             { source: "Pistol", target: "Weapon", label: "ako", color: "#000000" },
-            { source: "Famas", target: "Riffle", label: "instance", strokeDasharray: "5" },
+            { source: "Famas", target: "Riffle", label: "instance", strokeDasharray: "5" }, //instance = relation d'instance strokeDasharray pour l'affichage
             { source: "Glock-18", target: "Pistol", label: "instance", strokeDasharray: "5" },
             { source: "AK-47", target: "Riffle", label: "instance", strokeDasharray: "5" },
             { source: "M4A1", target: "Riffle", label: "instance", strokeDasharray: "5" },
@@ -483,8 +505,8 @@ export const GraphPage = () => {
                     <Typography variant="h6">Noeud carré = Concept</Typography>
                     <Typography variant="h6">Noeud rond = Instance</Typography>
                     <Typography variant="h6">Noeud et relation rouge = Attribut</Typography>
-                    <Typography variant="h6">AKO - A kind of = relation extand</Typography>
-                    <Typography variant="h6">instance = relation d'héritage</Typography>
+                    <Typography variant="h6">AKO - A kind of = relation héritage</Typography>
+                    <Typography variant="h6">instance = relation d'instanciation</Typography>
                 </Box>
                 <Box className="flex flex-col p-2">
                     <Typography variant="h6">Recherche</Typography>
